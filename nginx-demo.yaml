@@ -1,0 +1,48 @@
+# renseigner que c'est un fichier de configuration pour Kubernetes
+apiVersion: apps/v1
+# le type de ressource
+kind: Deployment
+# métadonnées de la ressource
+metadata:
+  # nom de ma ressource
+  name: nginx-demo
+  # lien avec mes éléments
+  labels:
+    app: nginx
+
+# spécification du deployment
+spec:
+  # information sur les replicats de pods
+  replicas: 3
+  # lien d'appel de la ressource
+  selector:
+    matchLabels:
+      app: nginx
+  # template = pod
+  template:
+    # metadonnes du pod
+    metadata:
+      labels:
+        app: nginx
+    # spécification du pod
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:stable-alpine3.17
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            # Mi = Mebibytes, 1 Mi = 2^20 octets = 1024Kb
+            memory: "128Mi"
+            cpu: "500m"
+        volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: mon-volume
+      volumes:
+      - name: mon-volume
+        persistentVolumeClaim:
+          claimName: volume-claime-persistant
+
+
+

@@ -1,0 +1,6 @@
+name: mon-app-name
+label: mon-app-name
+containers:
+  name: mon-container-name
+  image: mon-container-image
+  port: mon-container-port

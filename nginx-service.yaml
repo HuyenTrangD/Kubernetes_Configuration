@@ -1,0 +1,21 @@
+# ceci est un fichier de config de kubernetes
+apiVersion: v1
+# type de fichier de config
+kind: Service
+# métadonnées du fichier de config
+metadata:
+  # nom de la ressource
+  name: nginx-service
+# spécificité de la ressource
+spec:
+  # lier mon service à son déploiement
+  selector:
+      app: nginx
+  ports:
+  - port: 9080
+  # port de mes pod
+    protocol: TCP
+    # port des pod à écouter
+    targetPort: 9080
+
+
